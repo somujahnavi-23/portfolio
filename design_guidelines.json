@@ -1,0 +1,138 @@
+{
+  "project_name": "Jahnavi Somu - AI/Data Professional Portfolio",
+  "theme": "Dark",
+  "archetype": "Archetype 4 (Swiss & High-Contrast)",
+  "typography": {
+    "fonts": {
+      "headings": "Clash Display",
+      "body": "Outfit",
+      "mono": "JetBrains Mono"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter font-medium",
+      "h2": "text-3xl sm:text-4xl tracking-tight font-medium",
+      "h3": "text-xl sm:text-2xl tracking-tight font-medium",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed text-zinc-400",
+      "labels": "text-xs tracking-[0.2em] uppercase font-mono text-zinc-500"
+    },
+    "rules": [
+      "Never center headings by default. Use explicit alignment.",
+      "Do NOT use Inter, Roboto, Open Sans, Lato, or Syne for headings.",
+      "Use JetBrains Mono for data metrics (92%, 70K+) to emphasize the AI/Data context."
+    ]
+  },
+  "colors": {
+    "background": {
+      "base": "#000000",
+      "surface": "#0a0a0a",
+      "card": "#121212"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#A1A1AA",
+      "muted": "#71717A"
+    },
+    "accent": {
+      "primary": "#FF4500",
+      "primary_hover": "#E03E00",
+      "glow": "rgba(255, 69, 0, 0.15)"
+    },
+    "border": {
+      "default": "rgba(255, 255, 255, 0.1)",
+      "hover": "rgba(255, 255, 255, 0.2)"
+    },
+    "rules": [
+      "True black background (#000000) for maximum OLED contrast.",
+      "No purple or teal gradients.",
+      "Use Electric Orange (#FF4500) strictly for interactive accents and key data highlights."
+    ]
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-6 sm:px-12",
+    "section_spacing": "py-24 sm:py-32",
+    "grid": {
+      "mode": "The 'Tetris' Grid (Bento style for Skills and Projects)",
+      "gap": "gap-8 lg:gap-12",
+      "columns": "grid-cols-1 md:grid-cols-8 lg:grid-cols-12"
+    },
+    "surfaces": {
+      "cards": "bg-[#121212] border border-white/10 p-8 hover:border-white/20 transition-colors",
+      "glass": "backdrop-blur-xl bg-black/60 border-b border-white/10"
+    }
+  },
+  "motion_and_interactions": {
+    "libraries": [
+      "framer-motion",
+      "lenis"
+    ],
+    "animations": {
+      "entrance": "Staggered fade-up for list items.",
+      "hover": "Cards lift slightly (-translate-y-1) with border color change.",
+      "hero": "Kinetic typography or smooth reveal for the H1."
+    },
+    "accessibility": "Respect prefers-reduced-motion."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#FF4500] text-white px-6 py-3 font-medium hover:bg-[#E03E00] transition-colors rounded-none",
+      "secondary": "bg-transparent border border-white/20 text-white px-6 py-3 font-medium hover:bg-white/5 transition-colors rounded-none"
+    },
+    "tags": "px-3 py-1 bg-white/5 border border-white/10 text-xs font-mono text-zinc-300 rounded-full",
+    "navigation": "Sticky top glassmorphism header, z-50. Visible links on desktop.",
+    "form": "Shadcn UI Input/Textarea heavily customized: bg-transparent border-white/10 focus:border-[#FF4500] rounded-none."
+  },
+  "sections": [
+    {
+      "name": "Hero",
+      "content": "Jahnavi Somu - AI Business Analyst / AI Data Analyst. Pursuing M.S. in Data Science. Located Jersey City, NJ.",
+      "design_instructions": "Massive typography. Overlay the abstract network background image with bg-black/80 so text is perfectly legible. Include two CTAs: Download Resume, Contact Me."
+    },
+    {
+      "name": "About",
+      "content": "1.5+ years experience in healthcare & enterprise. Bridging data and business logic.",
+      "design_instructions": "Asymmetric layout. Text on one side, profile picture (or abstract data visual if preferred) on the other. Use JetBrains Mono for specific tech keywords."
+    },
+    {
+      "name": "Experience Timeline",
+      "design_instructions": "Vertical timeline with 1px left border (white/10). Highlight dates in mono font. Emphasize roles and impact."
+    },
+    {
+      "name": "Skills Bento Grid",
+      "content": "Business Analysis, AI & GenAI, Data & BI, Analytics, Data Management, SQL, Power BI, Tableau, Python.",
+      "design_instructions": "Use a Tetris-style Bento grid. Instead of basic lists, create visually distinct cards for each category. Use Phosphor Icons or Lucide."
+    },
+    {
+      "name": "Featured Projects",
+      "content": "Highlight metrics: 92% accuracy, 70K+ records.",
+      "design_instructions": "Large metric numbers in #FF4500 (Orange) and mono font. Make the data the hero of the card. Flat design, no heavy drop shadows."
+    },
+    {
+      "name": "Contact",
+      "content": "Working contact form, social links (LinkedIn, email, phone).",
+      "design_instructions": "Minimalist form. Solid black background with subtle white/10 borders. Large 'Let's Talk' typography."
+    }
+  ],
+  "media": {
+    "image_urls": {
+      "hero_background": "https://images.pexels.com/photos/10325707/pexels-photo-10325707.png",
+      "profile_placeholder": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHdvbWFuJTIwbW9kZXJufGVufDB8fHx8MTc4MjY3MDkxNnww&ixlib=rb-4.1.0&q=85"
+    },
+    "descriptions": {
+      "hero_background": "Abstract orange network lines on dark background. Use with heavy black overlay (bg-black/80).",
+      "profile_placeholder": "Professional modern headshot placeholder for Jahnavi."
+    }
+  },
+  "testing": {
+    "attributes": "All interactive elements MUST have a data-testid attribute in kebab-case (e.g., data-testid='contact-submit-button')."
+  },
+  "instructions_to_main_agent": [
+    "Install and use Framer Motion, Lenis, and Phosphor Icons/Lucide.",
+    "Do NOT use HTML native date/select/dialog. Use Shadcn components and customize their borders to be white/10.",
+    "Do NOT use generic purple/teal colors.",
+    "Implement the UI using plain Tailwind CSS in the raw HTML elements for structural layouts, and use Shadcn only for interactive logic.",
+    "Ensure all text meets at least 4.5:1 contrast ratio against the #000000/#121212 backgrounds.",
+    "Do not use transparent header without blur/scrim over images.",
+    "Include data-testid on every clickable element."
+  ]
+}
