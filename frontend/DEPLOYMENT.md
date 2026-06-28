@@ -1,28 +1,32 @@
 # Deploying this portfolio to Vercel
 
-This portfolio is a **fully static React app** (no backend / no environment variables required).
+This portfolio is a **fully static React app** — no backend, no env vars, no data storage.
 
-## Option A — Deploy from a Git repo (recommended)
+## What was configured for Vercel
+- **`frontend/package.json`** pins **Node 20.x** (`engines`) and the Corepack `packageManager` hash was removed (that hash mismatch is the usual cause of `yarn install` exiting 1 on Vercel's Node 22 + Corepack).
+- **Repo-root `vercel.json`** builds only the frontend (`cd frontend && yarn install && yarn build`, output `frontend/build`) with SPA rewrites.
+- **Repo-root `.vercelignore`** excludes `backend/` so Vercel never tries to build the Python app (which fails on the internal `emergentintegrations` package).
+- **`frontend/vercel.json`** provides the same rewrites if you deploy with Root Directory = `frontend`.
 
-1. Push the project to GitHub/GitLab/Bitbucket.
-2. In Vercel: **Add New → Project** and import the repo.
-3. Set **Root Directory** to `frontend` (the React app lives there).
-4. Vercel auto-detects **Create React App**. The included `frontend/vercel.json` already sets:
-   - Build command: `yarn build`
-   - Output directory: `build`
-   - SPA rewrites so routes like `/project/cardiovascular-risk-prediction` work on refresh/direct load.
-5. Click **Deploy**. Done.
+## Deploy (recommended — cleanest)
+1. Push the repo to GitHub.
+2. Vercel → **Add New → Project** → import the repo.
+3. **Project Settings → General → Root Directory = `frontend`.**
+4. Vercel auto-detects Create React App. Click **Deploy**.
 
-## Option B — Deploy with the Vercel CLI
+This path reads `frontend/package.json` (Node 20.x), never sees the backend, and uses `frontend/vercel.json` for routing.
 
+## Deploy (alternative — repo root)
+If you leave Root Directory at the repo root, the repo-root `vercel.json` + `.vercelignore` handle it: the backend is ignored and only the frontend is built. Set the **Node.js Version to 20.x** in Project Settings if the build picks Node 22.
+
+## CLI
 ```bash
 cd frontend
 npm i -g vercel
-vercel        # follow prompts (first deploy)
-vercel --prod # production deploy
+vercel --prod
 ```
 
 ## Notes
-- **No env vars needed** — the contact form was removed; the site only links out to email/LinkedIn/GitHub.
-- Résumés are served from external URLs, so no files need bundling.
-- The `@emergentbase/visual-edits` dev-only package was removed so `yarn install` runs cleanly on Vercel.
+- No environment variables required.
+- Résumés are external URLs (nothing to bundle).
+- Routes like `/project/cardiovascular-risk-prediction` work on refresh via the SPA rewrites.
