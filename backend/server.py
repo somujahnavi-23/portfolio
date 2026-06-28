@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import html
 import asyncio
 import logging
 from pathlib import Path
@@ -92,14 +93,18 @@ async def _send_notification_email(msg: ContactMessage):
         resend.api_key = api_key
         sender = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
         owner = os.environ.get('OWNER_EMAIL', 'jahnavisomu96@gmail.com')
-        html = f"""
+        safe_name = html.escape(msg.name)
+        safe_email = html.escape(msg.email)
+        safe_subject = html.escape(msg.subject) if msg.subject else "(none)"
+        safe_message = html.escape(msg.message)
+        body = f"""
         <div style="font-family:Arial,sans-serif;color:#111;">
           <h2 style="margin:0 0 12px;">New portfolio message</h2>
-          <p><strong>Name:</strong> {msg.name}</p>
-          <p><strong>Email:</strong> {msg.email}</p>
-          <p><strong>Subject:</strong> {msg.subject or '(none)'}</p>
+          <p><strong>Name:</strong> {safe_name}</p>
+          <p><strong>Email:</strong> {safe_email}</p>
+          <p><strong>Subject:</strong> {safe_subject}</p>
           <hr style="border:none;border-top:1px solid #eee;margin:16px 0;" />
-          <p style="white-space:pre-wrap;">{msg.message}</p>
+          <p style="white-space:pre-wrap;">{safe_message}</p>
         </div>
         """
         params = {
@@ -107,7 +112,7 @@ async def _send_notification_email(msg: ContactMessage):
             "to": [owner],
             "reply_to": msg.email,
             "subject": f"Portfolio contact: {msg.subject or msg.name}",
-            "html": html,
+            "html": body,
         }
         await asyncio.to_thread(resend.Emails.send, params)
         logger.info("Notification email sent.")
@@ -125,12 +130,6 @@ async def create_contact(payload: ContactCreate):
         raise HTTPException(status_code=500, detail="Failed to save your message. Please try again.")
     await _send_notification_email(msg)
     return msg
-
-
-@api_router.get("/contact", response_model=List[ContactMessage])
-async def list_contacts():
-    items = await db.contact_messages.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
-    return items
 
 
 app.include_router(api_router)
