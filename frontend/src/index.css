@@ -24,6 +24,11 @@ body {
     color: #ffffff;
 }
 
+/* Hide platform-injected badge */
+#emergent-badge {
+    display: none !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 10px;

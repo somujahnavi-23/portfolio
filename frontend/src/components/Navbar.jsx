@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { navLinks, profile } from "../data/portfolioData";
+import { navLinks } from "../data/portfolioData";
+import { ResumeDownload } from "./ResumeDownload";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -50,13 +51,7 @@ export const Navbar = () => {
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-volt transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
-          <a
-            data-testid="nav-resume-btn"
-            href={profile.resumeBA}
-            className="bg-volt hover:bg-volt-hover text-white px-5 py-2.5 text-sm font-medium transition-colors"
-          >
-            Resume
-          </a>
+          <ResumeDownload variant="primary" testIdPrefix="nav-resume" align="right" compact />
         </div>
 
         <button
@@ -88,13 +83,7 @@ export const Navbar = () => {
                   {l.label}
                 </button>
               ))}
-              <a
-                data-testid="nav-mobile-resume-btn"
-                href={profile.resumeBA}
-                className="bg-volt text-white px-5 py-3 text-sm font-medium text-center"
-              >
-                Download Resume
-              </a>
+              <ResumeDownload variant="primary" testIdPrefix="nav-mobile-resume" />
             </div>
           </motion.div>
         )}

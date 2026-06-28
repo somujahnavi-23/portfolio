@@ -1,6 +1,6 @@
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Toaster } from "sonner";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
@@ -10,8 +10,21 @@ import { Projects } from "@/components/Projects";
 import { Education } from "@/components/Education";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import CaseStudy from "@/pages/CaseStudy";
 
 const Portfolio = () => {
+  const location = useLocation();
+
+  // Support /#section navigation when returning from a case study.
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, [location]);
+
   return (
     <div className="App bg-black min-h-screen">
       <div className="grain" />
@@ -26,18 +39,6 @@ const Portfolio = () => {
         <Contact />
       </main>
       <Footer />
-      <Toaster
-        position="bottom-right"
-        theme="dark"
-        toastOptions={{
-          style: {
-            background: "#0c0c0c",
-            border: "1px solid rgba(255,255,255,0.1)",
-            color: "#fff",
-            borderRadius: "0",
-          },
-        }}
-      />
     </div>
   );
 };
@@ -47,6 +48,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Portfolio />} />
+        <Route path="/project/:slug" element={<CaseStudy />} />
       </Routes>
     </BrowserRouter>
   );

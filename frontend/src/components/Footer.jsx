@@ -1,5 +1,5 @@
 import { profile } from "../data/portfolioData";
-import { Mail, Linkedin, ArrowUp } from "lucide-react";
+import { Mail, Linkedin, Github, ArrowUp } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -16,6 +16,9 @@ export const Footer = () => {
           </a>
           <a data-testid="footer-linkedin" href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center border border-white/10 text-zinc-400 hover:text-volt hover:border-volt/50 transition-colors">
             <Linkedin size={17} />
+          </a>
+          <a data-testid="footer-github" href={profile.github} target="_blank" rel="noopener noreferrer" className="h-10 w-10 flex items-center justify-center border border-white/10 text-zinc-400 hover:text-volt hover:border-volt/50 transition-colors">
+            <Github size={17} />
           </a>
           <button
             data-testid="footer-scroll-top"

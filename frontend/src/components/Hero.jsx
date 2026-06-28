@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Download, MapPin } from "lucide-react";
+import { ArrowDown, MapPin } from "lucide-react";
 import { profile } from "../data/portfolioData";
+import { ResumeDownload } from "./ResumeDownload";
 
 const word = {
   hidden: { y: "110%" },
@@ -71,14 +72,7 @@ export const Hero = () => {
           >
             Get in touch
           </button>
-          <a
-            data-testid="hero-resume-btn"
-            href={profile.resumeBA}
-            className="group flex items-center gap-2 border border-white/20 hover:bg-white/5 text-white px-7 py-3.5 font-medium transition-colors"
-          >
-            <Download size={18} className="group-hover:text-volt transition-colors" />
-            Download Resume
-          </a>
+          <ResumeDownload variant="secondary" testIdPrefix="hero-resume" />
           <span className="flex items-center gap-2 text-zinc-500 text-sm font-mono ml-2">
             <MapPin size={15} className="text-volt" /> {profile.location}
           </span>
