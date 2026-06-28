@@ -1,0 +1,6 @@
+backend
+tests
+scripts
+memory
+test_reports
+*.md
