@@ -1,0 +1,33 @@
+{
+  "summary": "Regression smoke test (frontend-only) after Vercel deploy-config change (package.json engines node 20.x, removed packageManager hash; added repo-root vercel.json + .vercelignore). All 7 acceptance checks pass on public URL. No regressions.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verification_results": [
+    {"check": "Home page (/) loads with all sections (Hero, About, Experience, Skills, Projects, Education, Contact, Footer)", "status": "PASS", "notes": "All 8 sections render. No console/page errors. Dark theme intact."},
+    {"check": "NO contact form; contact-details exists with email/phone/LinkedIn/GitHub/location", "status": "PASS", "notes": "data-testid='contact-form' count=0; data-testid='contact-details' count=1. Body text contains '@', 'linkedin', 'github', 'phone', '+'."},
+    {"check": "Hero & Nav resume dropdowns each show exactly 2 .docx options with valid hrefs", "status": "PASS", "notes": "hero-resume-trigger and nav-resume-trigger each expose options 0 and 1 with .docx hrefs at customer-assets.emergentagent.com (AI_Business_Analyst.docx + AI_Data_Analyst.docx). Option 2 absent."},
+    {"check": "project-card-0 -> /project/cardiovascular-risk-prediction renders casestudy-page", "status": "PASS", "notes": "href='/project/cardiovascular-risk-prediction'; click navigates and casestudy-page is rendered."},
+    {"check": "project-card-1 -> /project/healthcare-operations-dashboard renders casestudy-page", "status": "PASS", "notes": "href='/project/healthcare-operations-dashboard'; click navigates and casestudy-page is rendered."},
+    {"check": "SPA deep-link /project/healthcare-operations-dashboard renders case study", "status": "PASS", "notes": "Direct goto renders casestudy-page with H1 'Healthcare Operations Analytics Dashboard'. Screenshot captured."},
+    {"check": "GitHub links point to https://github.com/somujahnavi-23", "status": "PASS", "notes": "contact-github href = footer-github href = https://github.com/somujahnavi-23"},
+    {"check": "No 'Made with Emergent' badge visible", "status": "PASS", "notes": "#emergent-badge count=0; no anchor with 'Made with Emergent' text."}
+  ],
+  "test_report_links": ["/app/test_reports/iteration_3.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "vercel.json / .vercelignore live at repo root (per request). package.json now pins node engine to 20.x and packageManager hash was removed -- aligns with Vercel build. No code regressions observed.",
+    "Static SPA routing works via deep-link, confirming Vercel rewrites won't be the only safety net during local preview (CRA dev server already handles fallback)."
+  ],
+  "updated_files": ["/app/test_reports/iteration_3.json (new)"],
+  "success_rate": {"backend": "n/a (no backend per request)", "frontend": "100% (8/8 checks)"},
+  "test_credentials": "N/A — public static site, no auth.",
+  "seed_data_creation": "None.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Static frontend on https://portfolio-showcase-2828.preview.emergentagent.com. Routes '/' and '/project/:slug'. Selectors used: contact-form, contact-details, hero-resume-trigger, hero-resume-option-{0,1}, nav-resume-trigger, nav-resume-option-{0,1}, project-card-0, project-card-1, casestudy-page, contact-github, footer-github. Backend is a no-op stub; do not test backend.",
+  "rca of the issue": "No issues. Deployment config change did not regress any acceptance criterion."
+}
